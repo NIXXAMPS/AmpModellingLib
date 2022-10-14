@@ -8,13 +8,20 @@
 
 int main()
 {
+    int i;
     //std::cout << "Hello World!\n";
-    ampStage a(2.34f);
+    float output[44100];
+
+    BQFilter f1(FilterType::HighPass, 44100, 1e3f, 0.707f, 1, 1);
+
+    for (i = 0; i < 44100; i++) {
+        output[i] = f1.run(1);
+        if(i > 44090)
+            std::cout << output[i] << "\n";
+
+    }
 
     
-    printf("%f\n", a.run(1.f));
-    BQFilter f1(FilterType::LowPass, 44100, 1e3f, 0.707f, 1, 1);
-
 
 }
 
