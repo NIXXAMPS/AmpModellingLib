@@ -6,9 +6,12 @@ constexpr auto PI = 3.141592653589793f;
 constexpr auto SQRT2 = 1.414213562373095f;
 
 
-	enum FilterType {
-		LowPass1P, LowPass, HighPass, HighPass1P, BandPass, BandStop, LowShelf, HighShelf
-	};
+enum FilterType {
+	LowPass1P, LowPass, HighPass, HighPass1P, BandPass, BandStop, LowShelf, HighShelf
+};
+
+//declaration of classes
+
 
 	class ampStage {
 	private:
@@ -16,8 +19,9 @@ constexpr auto SQRT2 = 1.414213562373095f;
 	public:
 		ampStage(float gain);
 		ampStage();
-		float run(float input);
 
+		float run(float input);
+		
 	};
 
 	class ampStageL {
@@ -34,7 +38,7 @@ constexpr auto SQRT2 = 1.414213562373095f;
 
 
 	class BQFilter {
-	private:
+	public:
 		float a0;
 		float a1;
 		float a2;
@@ -45,11 +49,10 @@ constexpr auto SQRT2 = 1.414213562373095f;
 		float z2;
 		
 		float gain;
-	public:
-		BQFilter(float a0, float a1, float a2, float b1, float b2);
+
 		BQFilter(float a0, float a1, float a2, float b1, float b2, float overallgain, FilterType type);
 		BQFilter(FilterType type, float Fs, float Fc, float Q, float gain, float overallGain);
 		float run(float input);
 	};
 
-
+//declaration of misc functions

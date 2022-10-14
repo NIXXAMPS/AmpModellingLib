@@ -1,5 +1,7 @@
 #include "AmpModelling.h"
 
+
+//implementation of classes
 	ampStage::ampStage(float gain) {
 		this->a = gain;
 	}
@@ -7,10 +9,11 @@
 	ampStage::ampStage() {
 		this->a = 1;
 	}
-
+	
 	float ampStage::run(float input) {
 		return a * input;
 	}
+	
 
 
 	ampStageL::ampStageL() {
@@ -40,16 +43,6 @@
 	}
 
 
-	BQFilter::BQFilter(float a0, float a1, float a2, float b1, float b2) {
-		this->a0 = a0;
-		this->a1 = a1;
-		this->a2 = a2;
-		this->b1 = b1;
-		this->b2 = b2;
-		this->z1 = 0;
-		this->z2 = 0;
-		this->gain = 1;
-	}
 
 	BQFilter::BQFilter(float a0, float a1, float a2, float b1, float b2, float overallgain, FilterType type) {
 		this->a0 = a0;
@@ -63,7 +56,6 @@
 	}
 
 	BQFilter::BQFilter(FilterType type, float Fs, float Fc, float Q, float gain, float overallGain) {
-		//TODO filter calculation implementation
 		float norm;
 		float K = std::tan(PI * Fc / Fs);
 		this->gain = overallGain;
@@ -164,3 +156,6 @@
 		this->z2 = input * this->a2 - this->b2 * y;
 		return y;
 	}
+
+
+	//implementation of misc functions

@@ -9,7 +9,6 @@
 int main()
 {
     int i;
-    //std::cout << "Hello World!\n";
     float output[44100];
 
     BQFilter f1(FilterType::HighPass, 44100, 1e3f, 0.707f, 1, 1);
@@ -18,7 +17,6 @@ int main()
         output[i] = f1.run(1);
         if(i > 44090)
             std::cout << output[i] << "\n";
-
     }
 
     
