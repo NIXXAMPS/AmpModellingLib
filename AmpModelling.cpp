@@ -157,5 +157,86 @@
 		return y;
 	}
 
+	triode::triode(TriodeType type, float Ra, float Rk, float Vb) {
+		//temporary init
+		KP = 840.f;
+		mu = 100.f;
+		KVB = 11400.f;
+		X = 1.2f;
+		KG1 = 1030.f;
+
+		int i;
+		//TODO implement other triodes from 
+		switch (type)
+		{
+		case ECC83_EH:
+			KP = 840.f;
+			mu = 100.f;
+			KVB = 11400.f;
+			X = 1.2f;
+			KG1 = 1030.f;
+			break;
+		case ECC83_JJ:
+			break;
+		case ECC83_NK:
+			break;
+		default:
+			break;
+		}
+
+		this->Ra = Ra;
+		this->Rk = Rk;
+		this->Vb = Vb;
+
+		//tu krecu zajebane kalkulacije
+		//Newton Raphson algorithm for calculation
+		Ia = 1e-3;
+
+		for (i = 0; i < 10; i++) {
+			Ia = Ia - this->IaApprox(Ia) / this->diff(Ia);
+		}
+	}
+
+	//E1 rucno potvrdeno da je dobro
+	float triode::E1(float Ia) {
+		float Vak, Vgk, y;
+		Vak = Vb - (Ra + Rk) * Ia;
+		Vgk = -Rk * Ia;
+		y = std::sqrt(KVB + std::pow(Vak, 2));
+		y = 1/mu + (Vgk / y);
+		y = KP * y;
+		y = std::exp(y);
+		y = std::log(1 + y);
+		y = (Vak / KP) * y;
+		return y;
+	}
+
+	//IaApprox rucno potvrdeno da je dobro
+	float triode::IaApprox(float Ia) {
+		float y = 0;
+		float e_val = this->E1(Ia);
+		if (e_val >= 0)
+			y = (float)(Ia - 2 * std::pow(e_val, X) / KG1);
+		return y;
+	}
+
+	float triode::diff(float Ia) {
+		float x1, x2, y1, y2;
+		x1 = Ia - DELTA;
+		x2 = Ia + DELTA;
+		y1 = this->IaApprox(x1);
+		y2 = this->IaApprox(x2);
+		return (y2 - y1) / (x2 - x1);
+	}
+
 
 	//implementation of misc functions
+
+	float diff(float (*f)(float), float x) {
+		float x1, x2, y1, y2;
+		x1 = x - DELTA;
+		x2 = x + DELTA;
+		y1 = (*f)(x1);
+		y2 = (*f)(x2);
+		return (y2 - y1) / (x2 - x1);
+	}

@@ -2,12 +2,19 @@
 
 #include <cmath>
 #include <stdexcept>
-constexpr auto PI = 3.141592653589793f;
-constexpr auto SQRT2 = 1.414213562373095f;
+
+
+constexpr float PI = 3.141592653589793f;
+constexpr float SQRT2 = 1.414213562373095f;
+constexpr float DELTA = 1e-6f;
 
 
 enum FilterType {
 	LowPass1P, LowPass, HighPass, HighPass1P, BandPass, BandStop, LowShelf, HighShelf
+};
+
+enum TriodeType {
+	ECC83_EH, ECC83_JJ, ECC83_NK
 };
 
 //declaration of classes
@@ -55,4 +62,32 @@ enum FilterType {
 		float run(float input);
 	};
 
+	class triode {
+	private:
+		float diff(float Ia);
+	public:
+		//static parameters of the triode
+		float KP;
+		float mu;
+		float KVB;
+		float X;
+		float KG1;
+		//TODO add dynamic parameters
+		//component values around the triode
+		float Ra;
+		float Rk;
+		float Vb;
+
+		float Ia;
+
+		triode(TriodeType type, float Ra, float Rk, float Vb);
+
+		float E1(float Ia);
+
+		float IaApprox(float Ia);
+		
+	};
+
 //declaration of misc functions
+
+	float diff(float (*f)(float), float x);

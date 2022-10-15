@@ -5,19 +5,14 @@
 #include <stdio.h>
 #include "AmpModelling.h"
 
+using namespace std;
 
 int main()
 {
     int i;
-    float output[44100];
+    triode V1a(TriodeType::ECC83_EH, 100e3, 820, 330);
 
-    BQFilter f1(FilterType::HighPass, 44100, 1e3f, 0.707f, 1, 1);
-
-    for (i = 0; i < 44100; i++) {
-        output[i] = f1.run(1);
-        if(i > 44090)
-            std::cout << output[i] << "\n";
-    }
+    cout << V1a.Ia*1000 << "\n";
 
     
 
