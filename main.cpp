@@ -10,7 +10,7 @@ using namespace std;
 int main()
 {
     int i;
-    triode V1a(TriodeType::ECC83_EH, 100e3, 820, 330);
+    AmpModelling::triode V1a(AmpModelling::TriodeType::ECC83_EH, 100e3, 820, 330);
 
     cout << V1a.Ia*1000 << "\n";
 

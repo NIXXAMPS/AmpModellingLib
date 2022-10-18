@@ -1,7 +1,7 @@
 #include "AmpModelling.h"
 
-
-//implementation of classes
+namespace AmpModelling {
+	//implementation of classes
 	ampStage::ampStage(float gain) {
 		this->a = gain;
 	}
@@ -9,11 +9,11 @@
 	ampStage::ampStage() {
 		this->a = 1;
 	}
-	
+
 	float ampStage::run(float input) {
 		return a * input;
 	}
-	
+
 
 
 	ampStageL::ampStageL() {
@@ -59,7 +59,7 @@
 		float norm;
 		float K = std::tan(PI * Fc / Fs);
 		this->gain = overallGain;
-		
+
 		switch (type)
 		{
 		case LowPass1P:
@@ -203,7 +203,7 @@
 		Vak = Vb - (Ra + Rk) * Ia;
 		Vgk = -Rk * Ia;
 		y = std::sqrt(KVB + std::pow(Vak, 2));
-		y = 1/mu + (Vgk / y);
+		y = 1 / mu + (Vgk / y);
 		y = KP * y;
 		y = std::exp(y);
 		y = std::log(1 + y);
@@ -240,3 +240,4 @@
 		y2 = (*f)(x2);
 		return (y2 - y1) / (x2 - x1);
 	}
+}

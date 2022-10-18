@@ -3,21 +3,22 @@
 #include <cmath>
 #include <stdexcept>
 
+namespace AmpModelling {
 
-constexpr float PI = 3.141592653589793f;
-constexpr float SQRT2 = 1.414213562373095f;
-constexpr float DELTA = 1e-6f;
+	constexpr float PI = 3.141592653589793f;
+	constexpr float SQRT2 = 1.414213562373095f;
+	constexpr float DELTA = 1e-6f;
 
 
-enum FilterType {
-	LowPass1P, LowPass, HighPass, HighPass1P, BandPass, BandStop, LowShelf, HighShelf
-};
+	enum FilterType {
+		LowPass1P, LowPass, HighPass, HighPass1P, BandPass, BandStop, LowShelf, HighShelf
+	};
 
-enum TriodeType {
-	ECC83_EH, ECC83_JJ, ECC83_NK
-};
+	enum TriodeType {
+		ECC83_EH, ECC83_JJ, ECC83_NK
+	};
 
-//declaration of classes
+	//declaration of classes
 
 
 	class ampStage {
@@ -28,7 +29,7 @@ enum TriodeType {
 		ampStage();
 
 		float run(float input);
-		
+
 	};
 
 	class ampStageL {
@@ -54,7 +55,7 @@ enum TriodeType {
 
 		float z1;
 		float z2;
-		
+
 		float gain;
 
 		BQFilter(float a0, float a1, float a2, float b1, float b2, float overallgain, FilterType type);
@@ -85,9 +86,11 @@ enum TriodeType {
 		float E1(float Ia);
 
 		float IaApprox(float Ia);
-		
+
 	};
 
-//declaration of misc functions
+	//declaration of misc functions
 
 	float diff(float (*f)(float), float x);
+
+}
