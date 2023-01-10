@@ -2,6 +2,9 @@ This is meant to be a library for building various analog audio guitar systems d
 It's still work in progress, only thing that works so far is building and using IIR biquad filters.
 Stay tuned!
 
+
+[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC_BY--NC--SA_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+
 Shield: [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
 
 This work is licensed under a
